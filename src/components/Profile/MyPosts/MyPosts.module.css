@@ -5,3 +5,15 @@
 .item img{
     width: 50px;
 }
+
+.descriptionBlock{
+    padding: 10px;
+}
+
+.postsBlock{
+    padding: 10px;
+}
+
+.posts{
+    margin-top: 10px;
+}
