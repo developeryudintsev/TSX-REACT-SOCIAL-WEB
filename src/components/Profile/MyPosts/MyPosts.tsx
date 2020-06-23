@@ -2,26 +2,30 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 
+type IMyPosts={
+    propfilePosts:Array<MyPosts>
+}
 
-const MyPosts = () => {
-    let PostData = [
-        {id: 1, massage: 'Hi ,how are you?',likesCount:10},
-        {id: 1, massage: 'it`s my first post ',likesCount:100},
-    ]
+type MyPosts={
+    id:number,
+    message:string,
+    likesCount:number
+}
 
+const MyPosts = (props:IMyPosts) => {
     return (
         <div className={s.postsBlock}>
-            <h3>My posts</h3>
+            <h2>My posts</h2>
             <div>
-                <div><textarea></textarea></div>
+                <textarea></textarea>
                 <div>
                     <button>Add post</button>
                 </div>
             </div>
 
             <div className={s.posts}>
-                {PostData.map(m=><Post message={m.massage} likesCount={m.likesCount}/>)}
-            </div>
+                {props.propfilePosts.map(m => <Post message={m.message} likesCount={m.likesCount}/>)}
+              </div>
         </div>
     )
 }

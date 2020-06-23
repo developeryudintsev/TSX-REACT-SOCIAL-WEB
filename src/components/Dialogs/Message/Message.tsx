@@ -1,15 +1,12 @@
 import React from 'react';
 import s from "./../Dialogs.module.css";
-import {NavLink} from 'react-router-dom';
 
-type TypeString={
-    name:string,
-    id:number
+type iMessage = {
+    name: string
 }
 
-const  Messages=(props:TypeString)=>{
+const Message = (props: iMessage) => {
     return <div className={s.message}>{props.name}</div>
 }
 
-
-export default Messages;
+export default Message;

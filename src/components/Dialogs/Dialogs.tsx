@@ -1,40 +1,33 @@
 import React from 'react';
 import s from "./Dialogs.module.css";
-import DilogItem from "./DialogIteam/DialogsIteam";
-import Messages from "./Message/Message";
-import {NavLink} from 'react-router-dom';
+import DialogItem from "./DialogItem/DialogItem";
+import Message from "./Message/Message";
 
-type TypePropsString={
-    name:string,
-    id:number,
+type DialogsGeneralType={
+    AppDialogs:Array<iAppDialog>,
+    AppMessages:Array<iAppMessage>,
 }
 
-let Dialogs = (props:TypePropsString) => {
+type iAppDialog = {
+    id: number,
+    name: string
+}
 
-    let dealogsData = [
-        {id: 1, name: 'Dimach'},
-        {id: 2, name: 'Sasha'},
-        {id: 3, name: 'Igor'},
-        {id: 4, name: 'Olga'},
-        {id: 5, name: 'Nadzeika'},
-    ]
+type iAppMessage = {
+    id:number,
+    message: string
+}
 
-    let massageData = [
-        {id: 1, massage: 'Hi'},
-        {id: 2,massage: 'How are you'},
-        {id: 3,massage: 'yoo'},
-        {id: 4,massage: 'yoo'},
-        {id: 5, massage: 'yoo'},
-    ]
+let Dialogs = (props:DialogsGeneralType) => {
 
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {dealogsData.map(m=><DilogItem id={m.id} name={m.name}/>)}
+                {props.AppDialogs.map(m => <DialogItem name={m.name} id={m.id}/>)}
             </div>
 
             <div className={s.messages}>
-                {massageData.map(m=> <Messages name={m.massage} id={m.id}/>)}
+                {props.AppMessages.map(m => <Message name={m.message}/>)}
             </div>
         </div>
     )

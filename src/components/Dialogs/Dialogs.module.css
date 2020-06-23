@@ -7,17 +7,8 @@
     padding: 10px;
 }
 
-.dialog {
+.dialogsItems .dialog {
     color: white;
-    text-decoration: none;
-}
-.LinkD{
-    color: gold;
-    text-decoration: none;
-}
-.Link{
-    color: skyblue;
-    text-decoration: none;
 }
 
 .dialogsItems .active {

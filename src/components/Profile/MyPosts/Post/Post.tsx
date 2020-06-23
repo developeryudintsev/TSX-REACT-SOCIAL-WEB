@@ -3,7 +3,7 @@ import s from './Post.module.css';
 
 type iMyPosts = {
     message: string,
-    likesCount: number,
+    likesCount: number
 }
 
 const Post = (props: iMyPosts) => {
