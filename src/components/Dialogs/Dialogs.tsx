@@ -1,41 +1,40 @@
 import React from 'react';
 import s from "./Dialogs.module.css";
+import DilogItem from "./DialogIteam/DialogsIteam";
+import Messages from "./Message/Message";
 import {NavLink} from 'react-router-dom';
 
 type TypePropsString={
     name:string,
-    id:string,
-}
-
-const  DilogItem=(props:TypePropsString)=>{
-    return(
-        <div className={s.active}><NavLink to={'/dialogs/'+props.id} className={s.LinkD}>{props.name}</NavLink></div>
-    )
-}
-
-type TypeString={
-    name:string,
-}
-
-const  Message=(props:TypeString)=>{
-    return <div className={s.message}>{props.name}</div>
+    id:number,
 }
 
 let Dialogs = (props:TypePropsString) => {
+
+    let dealogsData = [
+        {id: 1, name: 'Dimach'},
+        {id: 2, name: 'Sasha'},
+        {id: 3, name: 'Igor'},
+        {id: 4, name: 'Olga'},
+        {id: 5, name: 'Nadzeika'},
+    ]
+
+    let massageData = [
+        {id: 1, massage: 'Hi'},
+        {id: 2,massage: 'How are you'},
+        {id: 3,massage: 'yoo'},
+        {id: 4,massage: 'yoo'},
+        {id: 5, massage: 'yoo'},
+    ]
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <DilogItem name={'Dimach'} id={'1'}/>
-                <DilogItem name={'Sasha'} id={'2'}/>
-                <DilogItem name={'Igor'} id={'3'}/>
-                <DilogItem name={'Olga'} id={'4'}/>
-                <DilogItem name={'Nadzeika'} id={'5'}/>
+                {dealogsData.map(m=><DilogItem id={m.id} name={m.name}/>)}
             </div>
 
             <div className={s.messages}>
-                <Message name={'Hi'}/>
-                <Message name={'How are you?'}/>
-                <Message name={'Yoo'}/>
+                {massageData.map(m=> <Messages name={m.massage} id={m.id}/>)}
             </div>
         </div>
     )
