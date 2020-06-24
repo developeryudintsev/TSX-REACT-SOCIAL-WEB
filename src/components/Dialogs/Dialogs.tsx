@@ -2,10 +2,16 @@ import React from 'react';
 import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import {dialogsType, messagesType} from "../../App";
 
 type DialogsGeneralType={
-    AppDialogs:Array<iAppDialog>,
-    AppMessages:Array<iAppMessage>,
+    appStateD:dialogsPageType
+
+}
+
+export type dialogsPageType = {
+    messages: Array<messagesType>,
+    dialogs: Array<dialogsType>
 }
 
 type iAppDialog = {
@@ -23,11 +29,11 @@ let Dialogs = (props:DialogsGeneralType) => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {props.AppDialogs.map(m => <DialogItem name={m.name} id={m.id}/>)}
+                {props.appStateD.dialogs.map(m => <DialogItem name={m.name} id={m.id}/>)}
             </div>
 
             <div className={s.messages}>
-                {props.AppMessages.map(m => <Message name={m.message}/>)}
+                {props.appStateD.messages.map(m => <Message name={m.message}/>)}
             </div>
         </div>
     )

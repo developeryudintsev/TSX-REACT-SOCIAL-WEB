@@ -1,22 +1,28 @@
 import React from 'react';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {postsType} from "../../App";
 
 type IpropfilePosts={
-    AppPosts:Array<iProfilePosts>
+    appStateP:IpropfileType
 }
 
-type iProfilePosts={
-    id:number,
-    message:string,
-    likesCount:number
+type IpropfileType={
+    posts:Array<iProfilePosts>
 }
 
-const Profile = (props:IpropfilePosts) => {
+type iProfilePosts = {
+    id: number,
+    message: string,
+    likesCount: number
+}
+
+const Profile = (props: IpropfilePosts) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts propfilePosts={props.AppPosts}/>
+            <MyPosts propfilePosts={props.appStateP.posts}/>
+
         </div>
     )
 }

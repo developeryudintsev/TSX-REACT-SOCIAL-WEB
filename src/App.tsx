@@ -3,44 +3,56 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import Dialogs from "./components/Dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import Header from "./components/Header/Header";
 
- type AppgeneralType={
-    dialogs:Array<iAppDialog>,
-    messages:Array<iAppMessage>,
-     posts:Array<iAppPosts>
+export type postsType = {
+    id: number,
+    message: string,
+    likesCount: number
+}
+export  type profilePageType = {
+    posts: Array<postsType>
 }
 
-type iAppDialog = {
+export  type messagesType = {
+    id: number,
+    message: string
+}
+export type dialogsType = {
     id: number,
     name: string
 }
-
-type iAppMessage = {
-    id:number,
-    message: string
+export type dialogsPageType = {
+    messages: Array<messagesType>,
+    dialogs: Array<dialogsType>
 }
 
-type iAppPosts={
-     id:number,
-    message:string,
-    likesCount:number
+export type sidebarType = {}
+
+export type istate = {
+    profilePage: profilePageType,
+    dialogsPage: dialogsPageType,
+    sidebar: sidebarType
 }
 
-const App = (props:AppgeneralType) => {
+type AppStateType = {
+    state: istate
+}
+
+const App = (props: AppStateType) => {
     return (
-        <BrowserRouter>
-            <div className='app-wrapper'>
-                <Header/>
-                <Navbar/>
-                <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() => <Dialogs AppDialogs={props.dialogs} AppMessages={props.messages}/>}/>
-                    <Route path='/profile' render={() => <Profile AppPosts={props.posts} />}/>
 
-                </div>
+        <div className='app-wrapper'>
+            <Header/>
+            <Navbar/>
+            <div className='app-wrapper-content'>
+                <Route path='/dialogs' render={() => <Dialogs appStateD={props.state.dialogsPage}/>}/>
+                <Route path='/profile' render={() => <Profile appStateP={props.state.profilePage}/>}/>
+
             </div>
-        </BrowserRouter>);
+        </div>
+    );
 }
 
 export default App;
