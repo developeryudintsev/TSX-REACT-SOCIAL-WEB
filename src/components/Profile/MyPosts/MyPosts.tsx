@@ -13,13 +13,20 @@ type MyPosts={
 }
 
 const MyPosts = (props:IMyPosts) => {
+
+    let newPost=React.createRef<HTMLTextAreaElement>();
+let addPost=()=>{
+    let text=newPost.current?.value;
+    alert(text)
+}
+
     return (
         <div className={s.postsBlock}>
             <h2>My posts</h2>
             <div>
-                <textarea></textarea>
+                <textarea ref={newPost}></textarea>
                 <div>
-                    <button>Add post</button>
+                    <button onClick={addPost}>Add post</button>
                 </div>
             </div>
 
