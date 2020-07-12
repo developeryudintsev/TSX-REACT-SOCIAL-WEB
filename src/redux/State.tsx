@@ -1,4 +1,5 @@
 import React from 'react';
+import {renderTree} from "../Render";
 
 export type postsType = {
     id: number,
@@ -8,7 +9,6 @@ export type postsType = {
 export  type profilePageType = {
     posts: Array<postsType>
 }
-
 export  type messagesType = {
     id: number,
     message: string
@@ -21,9 +21,7 @@ export type dialogsPageType = {
     messages: Array<messagesType>,
     dialogs: Array<dialogsType>
 }
-
 export type sidebarType = {}
-
 export type istate = {
     profilePage: profilePageType,
     dialogsPage: dialogsPageType,
@@ -56,5 +54,14 @@ let state: istate = {
     sidebar: {}
 }
 
+export let addPosts=(propsML:string)=>{
+    let newPost={
+        id: 1,
+        message: propsML,
+        likesCount: 10
+    }
+    state.profilePage.posts.push(newPost)
+    renderTree(state)
+}
 
 export default state

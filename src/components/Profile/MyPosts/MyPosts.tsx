@@ -2,29 +2,31 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 
-type IMyPosts={
-    propfilePosts:Array<MyPosts>
+type IMyPosts = {
+    propfilePosts: Array<MyPosts>,
+    addPost: (propsML: string) => void;
 }
 
-type MyPosts={
-    id:number,
-    message:string,
-    likesCount:number
+type MyPosts = {
+    id: number,
+    message: string,
+    likesCount: number
 }
 
-const MyPosts = (props:IMyPosts) => {
+const MyPosts = (props: IMyPosts) => {
 
-    let newPost=React.createRef<HTMLTextAreaElement>();
-let addPost=()=>{
-    let text=newPost.current?.value;
-    alert(text)
-}
-
+    let newPostElement = React.createRef<HTMLTextAreaElement>();
+    let addPost = () => {
+        props.addPost(newPostElement.current?newPostElement.current.value : 'xxx')
+        if(newPostElement.current){
+            newPostElement.current.value='';
+        }
+    }
     return (
         <div className={s.postsBlock}>
             <h2>My posts</h2>
             <div>
-                <textarea ref={newPost}></textarea>
+                <div><textarea ref={newPostElement}></textarea></div>
                 <div>
                     <button onClick={addPost}>Add post</button>
                 </div>
@@ -32,7 +34,7 @@ let addPost=()=>{
 
             <div className={s.posts}>
                 {props.propfilePosts.map(m => <Post message={m.message} likesCount={m.likesCount}/>)}
-              </div>
+            </div>
         </div>
     )
 }

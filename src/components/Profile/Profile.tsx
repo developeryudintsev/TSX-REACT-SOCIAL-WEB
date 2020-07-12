@@ -1,10 +1,10 @@
 import React from 'react';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {postsType} from "../../App";
 
 type IpropfilePosts={
-    appStateP:IpropfileType
+    appStateP:IpropfileType,
+    addPost:(propsML:string)=>void;
 }
 
 type IpropfileType={
@@ -21,7 +21,7 @@ const Profile = (props: IpropfilePosts) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts propfilePosts={props.appStateP.posts}/>
+            <MyPosts propfilePosts={props.appStateP.posts} addPost={props.addPost}/>
 
         </div>
     )

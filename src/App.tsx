@@ -14,7 +14,6 @@ export type postsType = {
 export  type profilePageType = {
     posts: Array<postsType>
 }
-
 export  type messagesType = {
     id: number,
     message: string
@@ -27,9 +26,7 @@ export type dialogsPageType = {
     messages: Array<messagesType>,
     dialogs: Array<dialogsType>
 }
-
 export type sidebarType = {}
-
 export type istate = {
     profilePage: profilePageType,
     dialogsPage: dialogsPageType,
@@ -37,7 +34,8 @@ export type istate = {
 }
 
 type AppStateType = {
-    state: istate
+    state: istate,
+    addProps:(propsML:string)=>void
 }
 
 const App = (props: AppStateType) => {
@@ -48,7 +46,7 @@ const App = (props: AppStateType) => {
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Route path='/dialogs' render={() => <Dialogs appStateD={props.state.dialogsPage}/>}/>
-                <Route path='/profile' render={() => <Profile appStateP={props.state.profilePage}/>}/>
+                <Route path='/profile' render={() => <Profile appStateP={props.state.profilePage} addPost={props.addProps}/>}/>
 
             </div>
         </div>
