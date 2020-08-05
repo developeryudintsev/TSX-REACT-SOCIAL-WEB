@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App, {profilePageType} from './App';
 import * as serviceWorker from './serviceWorker';
-import state, {addPosts} from "./redux/State";
+import state, {addPosts, updateNewPostText} from "./redux/State";
 import {BrowserRouter} from "react-router-dom";
+
 export  type messagesType = {
     id: number,
     message: string
@@ -32,7 +33,7 @@ export let renderTree=(state:istate)=>{
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App  state={state} addProps={addPosts} />
+                <App  state={state} addProps={addPosts} updateNewPostText={updateNewPostText}/>
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')

@@ -7,7 +7,8 @@ export type postsType = {
     likesCount: number
 }
 export  type profilePageType = {
-    posts: Array<postsType>
+    posts: Array<postsType>,
+    newPostText:string
 }
 export  type messagesType = {
     id: number,
@@ -34,6 +35,7 @@ let state: istate = {
             {id: 1, message: 'Hi', likesCount: 10},
             {id: 2, message: 'How are you?', likesCount: 100},
         ],
+        newPostText:''
     },
     dialogsPage: {
         messages: [
@@ -60,7 +62,12 @@ export let addPosts=(propsML:string)=>{
         message: propsML,
         likesCount: 10
     }
-    state.profilePage.posts.push(newPost)
+    state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText=''
+    renderTree(state)
+}
+export  let updateNewPostText=(newText:any)=>{
+    state.profilePage.newPostText=newText
     renderTree(state)
 }
 

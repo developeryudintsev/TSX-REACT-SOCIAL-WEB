@@ -6,13 +6,15 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import {Route} from "react-router-dom";
 import Header from "./components/Header/Header";
 
+
 export type postsType = {
     id: number,
     message: string,
     likesCount: number
 }
 export  type profilePageType = {
-    posts: Array<postsType>
+    posts: Array<postsType>,
+    newPostText:string
 }
 export  type messagesType = {
     id: number,
@@ -36,6 +38,7 @@ export type istate = {
 type AppStateType = {
     state: istate,
     addProps:(propsML:string)=>void
+    updateNewPostText:(newText:any)=>void
 }
 
 const App = (props: AppStateType) => {
@@ -46,7 +49,13 @@ const App = (props: AppStateType) => {
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Route path='/dialogs' render={() => <Dialogs appStateD={props.state.dialogsPage}/>}/>
-                <Route path='/profile' render={() => <Profile appStateP={props.state.profilePage} addPost={props.addProps}/>}/>
+                <Route
+                    path='/profile'
+                    render={() =>
+                        <Profile
+                            appStateP={props.state.profilePage}
+                            addPost={props.addProps}
+                            updateNewPostText={props.updateNewPostText}/>}/>
 
             </div>
         </div>

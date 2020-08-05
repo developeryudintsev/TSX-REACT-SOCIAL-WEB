@@ -4,14 +4,14 @@ import * as serviceWorker from './serviceWorker';
 import ReactDOM, {render} from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import App, {profilePageType} from "./App";
-import state, {addPosts,istate} from "./redux/State";
+import state, {addPosts, istate, updateNewPostText} from "./redux/State";
 
 
 export let renderTree=(props:istate)=>{
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App  state={props} addProps={addPosts} />
+                <App  state={state} addProps={addPosts} updateNewPostText={updateNewPostText}/>
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
