@@ -15,6 +15,8 @@ type MyPosts = {
     likesCount: number
 }
 
+
+
 const MyPosts = (props: IMyPosts) => {
 
     let newPostElement = React.createRef<any>();
