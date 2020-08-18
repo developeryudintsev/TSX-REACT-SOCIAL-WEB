@@ -3,60 +3,57 @@ import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import Dialogs from "./components/Dialogs/Dialogs";
-import {Route} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 import Header from "./components/Header/Header";
 
-
-export type postsType = {
+export type idialogs = {
+    id: number,
+    name: string
+}
+export type imessages = {
+    id: number,
+    message: string
+}
+export type idialogsPage = {
+    messages: Array<imessages>
+    dialogs: Array<idialogs>,
+}
+export type iposts = {
     id: number,
     message: string,
     likesCount: number
 }
-export  type profilePageType = {
-    posts: Array<postsType>,
-    newPostText:string
+export type iprofilePage = {
+    posts: Array<iposts>
+    newPostText: string
 }
-export  type messagesType = {
-    id: number,
-    message: string
-}
-export type dialogsType = {
-    id: number,
-    name: string
-}
-export type dialogsPageType = {
-    messages: Array<messagesType>,
-    dialogs: Array<dialogsType>
-}
-export type sidebarType = {}
-export type istate = {
-    profilePage: profilePageType,
-    dialogsPage: dialogsPageType,
-    sidebar: sidebarType
+export type isidebar = {}
+export type Apstate = {
+    profilePage: iprofilePage,
+    dialogsPage: idialogsPage,
+    sidebar: isidebar
 }
 
-type AppStateType = {
-    state: istate,
-    addProps:(propsML:string)=>void
-    updateNewPostText:(newText:any)=>void
+type generalState = {
+    state: Apstate,
+    addPosts: () => void;
+    updateNewPostText:(newText:string)=>void;
 }
 
-const App = (props: AppStateType) => {
+
+const App = (props: generalState) => {
+    debugger
     return (
-
         <div className='app-wrapper'>
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Route path='/dialogs' render={() => <Dialogs appStateD={props.state.dialogsPage}/>}/>
-                <Route
-                    path='/profile'
-                    render={() =>
-                        <Profile
-                            appStateP={props.state.profilePage}
-                            addPost={props.addProps}
-                            updateNewPostText={props.updateNewPostText}/>}/>
-
+                <Route path='/dialogs' render={() => <Dialogs AppGeneralStateForDialogs={props.state.dialogsPage}/>}/>
+                <Route path='/profile' render={() => <Profile
+                    profilePage={props.state.profilePage}
+                    addPosts={props.addPosts}
+                    updateNewPostText={props.updateNewPostText}
+                />}/>
             </div>
         </div>
     );

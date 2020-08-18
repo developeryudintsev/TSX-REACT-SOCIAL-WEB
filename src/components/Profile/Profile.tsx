@@ -2,34 +2,32 @@ import React from 'react';
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-type IpropfilePosts = {
-    appStateP: IpropfileType,
-    addPost: (propsML: string) => void;
-    updateNewPostText: (newText: any) => void
+export type iposts={
+    id:number,
+    message:string,
+    likesCount:number
 }
-
-type IpropfileType = {
-    posts: Array<iProfilePosts>,
+export type iprofilePage={
+    posts:Array<iposts>
     newPostText:string
 }
-
-type iProfilePosts = {
-    id: number,
-    message: string,
-    likesCount: number
+type profileState={
+    profilePage:iprofilePage,
+    addPosts:()=>void;
+    updateNewPostText:(newText:string)=>void;
 }
 
-const Profile = (props: IpropfilePosts) => {
+const Profile = (props:profileState) => {
+    debugger
     return (
         <div>
-            <ProfileInfo/>
-            <MyPosts
-                propfilePosts={props.appStateP.posts}
-                addPost={props.addPost}
-                newPostText={props.appStateP.newPostText}
-                updateNewPostText={props.updateNewPostText}/>
-
-        </div>
+            <ProfileInfo />
+            <MyPosts profilePosts={props.profilePage.posts}
+                     newPostText={props.profilePage.newPostText}
+                     addPosts={props.addPosts}
+                     updateNewPostText={props.updateNewPostText}
+            />
+            </div>
     )
 }
 

@@ -2,11 +2,12 @@ import React from 'react';
 import s from "./../Dialogs.module.css";
 
 type iMessage = {
-    name: string
+    id:number
+    message: string
 }
 
 const Message = (props: iMessage) => {
-    return <div className={s.message}>{props.name}</div>
+    return <div className={s.message}>{props.message}</div>
 }
 
 export default Message;
