@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import store, {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/state";
 
 type dialogs={
     id:number,
@@ -16,6 +17,7 @@ type messages = {
 type generalType={
     dialogs:Array<dialogs>,
     messages:Array<messages>
+    // newMessagesBody:string
 }
 
 type DialogGeneralState={
@@ -23,6 +25,15 @@ type DialogGeneralState={
 }
 
 let Dialogs = (props: DialogGeneralState) => {
+    let newMessageBody=store._state.dialogsPage.newMessageBody
+
+    let onSendMessageClick=()=>{
+        store.dispatch(sendMessageCreator())
+    }
+    let OnChangeHandler=(e:ChangeEvent<HTMLTextAreaElement>)=>{
+        let body=e.currentTarget.value
+        store.dispatch(updateNewMessageBodyCreator(body))
+    }
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
@@ -31,6 +42,10 @@ let Dialogs = (props: DialogGeneralState) => {
 
             <div className={s.messages}>
                 {props.AppGeneralStateForDialogs.messages.map(m => <Message message={m.message} id={m.id}/>)}
+                <div>
+                    <div><textarea onChange={OnChangeHandler} value={newMessageBody} placeholder={'Enter your message'}></textarea></div>
+                    <div><button onClick={onSendMessageClick}>Send</button></div>
+                </div>
             </div>
         </div>
     )
