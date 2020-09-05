@@ -11,6 +11,7 @@ import {StoreType} from "./redux/store";
 export let rerenderEntireTree = (state: istate) => {
     ReactDOM.render(
         <React.StrictMode>
+
             <BrowserRouter>
                 <App state={state}
                      dispatch={store.dispatch.bind(store)}
