@@ -1,8 +1,8 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
-import {addPostActionCreator, newPostElementCreator} from "../../../redux/state";
-
+import {addPostActionCreator, newPostElementCreator} from "../../../redux/profile-reducer";
+import {ActionsTypes} from "../../../redux/store";
 
 type generalType = {
     profilePosts: Array<posts>
@@ -17,8 +17,7 @@ type posts = {
 const MyPosts = (props: generalType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>();
     let addPost = () => {
-        // props.dispatch({type: 'ADD-POST'})
-        props.dispatch(addPostActionCreator())
+           props.dispatch(addPostActionCreator())
     }
     let onPostChange = () => {
         if (newPostElement.current) {
@@ -26,9 +25,6 @@ const MyPosts = (props: generalType) => {
             props.dispatch(newPostElementCreator(text))
         }
     }
-
-
-
     return (
         <div className={s.postsBlock}>
             <h2>My posts</h2>
