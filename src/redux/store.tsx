@@ -3,11 +3,6 @@ import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import sideBarReducer from "./sideBar-reducer";
 
-// const addPost = 'ADD-POST';
-// const updateNewPostText = 'UPDATE-NEW-POST-TEXT';
-// const updateNewMessageBody = 'update-New-Message-Body';
-// const SendMessage = 'Send-Message';
-
 export type idialogs = {
     id: number,
     name: string
@@ -109,30 +104,6 @@ let store: StoreType = {
     }
 }
 
-//  let addPostActionCreator = () => {
-//     return {
-//         type: addPost
-//     }
-// }
-//  let newPostElementCreator = (text: string) => {
-//     return {
-//         type: updateNewPostText,
-//         newText: text
-//
-//     }
-// }
-//
-//  let sendMessageCreator = (): SendMessageType => {
-//     return {
-//         type: SendMessage
-//     }
-// }
-//  let updateNewMessageBodyCreator = (body: string): updateNewMessageBodyType => {
-//     return {
-//         type: updateNewMessageBody,
-//         body: body
-//     }
-// }
 
 export default store;
 

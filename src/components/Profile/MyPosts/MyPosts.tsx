@@ -25,6 +25,9 @@ const MyPosts = (props: generalType) => {
             props.dispatch(newPostElementCreator(text))
         }
     }
+
+
+
     return (
         <div className={s.postsBlock}>
             <h2>My posts</h2>

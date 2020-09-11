@@ -1,16 +1,9 @@
 import {ActionsTypes, isidebar} from "./store";
 
- const sideBarReducer=(state:isidebar,action:ActionsTypes)=>{
+let initialState= {}
+
+ const sideBarReducer=(state:isidebar=initialState,action:ActionsTypes)=>{
     return state
 }
 
 export default sideBarReducer;
-
- //==============================
-// import {ActionsTypes, istate} from "./state";
-//
-// const sideBarReducer=(state:istate,action:ActionsTypes)=>{
-//     return state
-// }
-//
-// export default sideBarReducer;

@@ -4,6 +4,7 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {sendMessageCreator, updateNewMessageBodyCreator} from './../../redux/dialogs-reducer'
 import {StoreType} from '../../redux/store'
+import {ReduxStoreType} from "../../redux/redux-store";
 
 type dialogs = {
     id: number,
@@ -15,7 +16,7 @@ type messages = {
 }
 
 type DialogGeneralState = {
-    store: StoreType
+    store: ReduxStoreType
 
 }
 

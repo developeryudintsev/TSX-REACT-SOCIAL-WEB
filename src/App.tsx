@@ -6,6 +6,7 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import Header from "./components/Header/Header";
 import store, {ActionsTypes, StoreType} from "./redux/store";
+import {ReduxStoreType} from "./redux/redux-store";
 
 export type idialogs = {
     id: number,
@@ -38,7 +39,7 @@ export type Apstate = {
 type generalState = {
     state: Apstate,
     dispatch:(action:ActionsTypes)=>void
-    store:StoreType
+    store:ReduxStoreType
 }
 
 

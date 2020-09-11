@@ -3,7 +3,15 @@ import {ActionsTypes, iprofilePage, istate} from "./store";
 const addPost = 'ADD-POST';
 const updateNewPostText = 'UPDATE-NEW-POST-TEXT';
 
-const profileReducer = (state: iprofilePage, action: ActionsTypes) => {
+let initialState= {
+    posts: [
+        {id: 1, message: 'Hi', likesCount: 10},
+        {id: 2, message: 'How are you?', likesCount: 100},
+    ],
+    newPostText: 'it-kamasutra.com'
+}
+
+const profileReducer = (state: iprofilePage=initialState, action: ActionsTypes) => {
 
     switch (action.type) {
         case addPost:
