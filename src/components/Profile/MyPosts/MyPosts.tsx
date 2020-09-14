@@ -2,30 +2,39 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {addPostActionCreator, newPostElementCreator} from "../../../redux/profile-reducer";
-import {ActionsTypes} from "../../../redux/store";
+import {ActionsTypes, iposts} from "../../../redux/store";
+
+// type generalType = {
+//     profilePosts: Array<posts>
+//     dispatch: (action: any) => void
+//     newPostText: string
+// }
+// type posts = {
+//     id: number,
+//     message: string,
+//     likesCount: number
+// }
 
 type generalType = {
-    profilePosts: Array<posts>
-    dispatch: (action: any) => void
+    updateNewPostText:(text:string)=>void
+    addPost: () => void
+    posts: Array<iposts>
     newPostText: string
 }
-type posts = {
-    id: number,
-    message: string,
-    likesCount: number
-}
+
 const MyPosts = (props: generalType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>();
     let addPost = () => {
-           props.dispatch(addPostActionCreator())
+        props.addPost();
+        // props.dispatch(addPostActionCreator())
     }
     let onPostChange = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
-            props.dispatch(newPostElementCreator(text))
+            props.updateNewPostText(text)
+            // props.dispatch(newPostElementCreator(text))
         }
     }
-
 
 
     return (
@@ -42,7 +51,7 @@ const MyPosts = (props: generalType) => {
             </div>
 
             <div className={s.posts}>
-                {props.profilePosts.map(m => <Post message={m.message} likesCount={m.likesCount}/>)}
+                {props.posts.map(m => <Post message={m.message} likesCount={m.likesCount}/>)}
             </div>
         </div>
     )

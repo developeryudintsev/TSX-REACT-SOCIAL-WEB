@@ -1,4 +1,4 @@
-import {ActionsTypes, iprofilePage, istate} from "./store";
+import {ActionsTypes, AddPostActionType, iprofilePage, updateNewPostTextActionType} from "./store";
 
 const addPost = 'ADD-POST';
 const updateNewPostText = 'UPDATE-NEW-POST-TEXT';
@@ -12,7 +12,6 @@ let initialState= {
 }
 
 const profileReducer = (state: iprofilePage=initialState, action: ActionsTypes) => {
-
     switch (action.type) {
         case addPost:
             let newPost = {
@@ -32,16 +31,16 @@ const profileReducer = (state: iprofilePage=initialState, action: ActionsTypes) 
             return state;
     }
    }
-export let addPostActionCreator = () => {
+
+export let addPostActionCreator = ():AddPostActionType => {
     return {
         type: addPost
     }
 }
-export let newPostElementCreator = (text: string) => {
+export let newPostElementCreator = (text: string):updateNewPostTextActionType => {
     return {
         type: updateNewPostText,
         newText: text
-
     }
 }
 

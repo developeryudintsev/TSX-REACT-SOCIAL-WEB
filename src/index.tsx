@@ -6,16 +6,16 @@ import * as serviceWorker from './serviceWorker';
 import store from "./redux/redux-store";
 import {BrowserRouter} from "react-router-dom";
 import {istate} from "./redux/store";
+import StoreContext, {Provider} from "./StoreContext";
 
 
 export let rerenderEntireTree = (state: istate) => {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App state={state}
-                     dispatch={store.dispatch.bind(store)}
-                     store={store}
-                />
+               <Provider store={store}> {/*//объект  store из redux*/}
+                    <App/>
+                </Provider>
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
@@ -23,8 +23,8 @@ export let rerenderEntireTree = (state: istate) => {
 }
 
 rerenderEntireTree(store.getState());
-store.subscribe(()=>{
-    let state=store.getState();
+store.subscribe(() => {
+    let state = store.getState();
     rerenderEntireTree(state)
 });
 

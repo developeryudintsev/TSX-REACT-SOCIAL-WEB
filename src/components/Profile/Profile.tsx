@@ -1,31 +1,31 @@
 import React from 'react';
-import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {ActionsTypes} from "../../redux/store";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
-export type iposts={
-    id:number,
-    message:string,
-    likesCount:number
-}
-export type iprofilePage={
-    posts:Array<iposts>
-    newPostText:string
-}
-type profileState={
-    profilePage:iprofilePage,
-     dispatch:(action:ActionsTypes)=>void
-}
+// export type iposts={
+//     id:number,
+//     message:string,
+//     likesCount:number
+// }
+// export type iprofilePage={
+//     posts:Array<iposts>
+//     newPostText:string
+// }
+// type profileState={
+//     profilePage:iprofilePage,
+//      dispatch:(action:ActionsTypes)=>void
+// }
 
-const Profile = (props:profileState) => {
+// type storeType={
+//     store:createStoreType
+// }
+
+const Profile = () => {//мы убрали props так как больше нечего не передоём
     return (
         <div>
-            <ProfileInfo />
-            <MyPosts profilePosts={props.profilePage.posts}
-                     newPostText={props.profilePage.newPostText}
-                        dispatch={props.dispatch}
-            />
-            </div>
+            <ProfileInfo/>
+            <MyPostsContainer/>
+        </div>
     )
 }
 
