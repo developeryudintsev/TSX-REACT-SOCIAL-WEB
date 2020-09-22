@@ -104,7 +104,8 @@ let store: StoreType = {
     }
 }
 
-
+export type DialogsContainerType= SendMessageType|updateNewMessageBodyType
+export type myPostContainerType= AddPostActionType|updateNewMessageBodyType
 export default store;
 
 //===================================

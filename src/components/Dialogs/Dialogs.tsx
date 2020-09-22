@@ -2,15 +2,12 @@ import React, {ChangeEvent} from 'react';
 import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {sendMessageCreator, updateNewMessageBodyCreator} from './../../redux/dialogs-reducer'
-import {idialogsPage, StoreType} from '../../redux/store'
-import {Store} from 'redux'
+import {idialogsPage} from '../../redux/store'
 
 type DialogGeneralState = {
     dialogsPage:idialogsPage
     sendMessage:()=>void
     updateNewMessageBody:(body:string)=>void
-    store:Store //типизацыя из redux для Store
 }
 
 let Dialogs = (props: DialogGeneralState) => {

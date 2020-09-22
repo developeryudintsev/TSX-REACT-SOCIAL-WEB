@@ -1,96 +1,54 @@
 import React from 'react';
 import {sendMessageCreator, updateNewMessageBodyCreator} from './../../redux/dialogs-reducer'
 import Dialogs from "./Dialogs";
-import StoreContext from "../../StoreContext";
+import {connect} from "react-redux";
+import {istate} from "../../redux/store";
+import {Dispatch} from 'redux'
 
-
-let DialogsContainer = () => {//мы убрали props так как store из контехта 22cт.
-    return (
-        <StoreContext.Consumer>
-            {
-            (store) => {
-                let state =store.getState().dialogsPage
-
-                let newMessageBody = state.newMessageBody
-                let onSendMessageClick = () => {
-                    store.dispatch(sendMessageCreator())
-                }
-                let updateNewMessageBody = (body: string) => {
-
-                    store.dispatch(updateNewMessageBodyCreator(body))
-                }
-                return (<Dialogs sendMessage={onSendMessageClick}
-                                 updateNewMessageBody={updateNewMessageBody}
-                                 store={store}
-                                 dialogsPage={state}
-                />)
-            }
-        }
-
-        </StoreContext.Consumer>
-    )
-}
-
-export default DialogsContainer;
-
-
-//====================================================
-
-// import React, {ChangeEvent} from 'react';
-// import s from "./Dialogs.module.css";
-// import DialogItem from "./DialogItem/DialogItem";
-// import Message from "./Message/Message";
-// import {sendMessageCreator, updateNewMessageBodyCreator} from './../../redux/dialogs-reducer'
-// import {StoreType} from '../../redux/store'
-// import { createStoreType} from "../../redux/redux-store";
-//
-// type dialogs = {
-//     id: number,
-//     name: string
-// }
-// type messages = {
-//     id: number,
-//     message: string
-// }
-//
-// type DialogGeneralState = {
-//     store:createStoreType
-// }
-//
-// let Dialogs = (props: DialogGeneralState) => {
-//
-//
-//     let state = props.store.getState().dialogsPage
-//
-//     let newMessageBody = state.newMessageBody
-//     let onSendMessageClick = () => {
-//         props.store.dispatch(sendMessageCreator())
-//     }
-//     let onNewMessageChange = (event:ChangeEvent<HTMLTextAreaElement>) => {
-//         let body = event.currentTarget.value;
-//         props.store.dispatch(updateNewMessageBodyCreator(body))
-//     }
+// let DialogsContainer = () => {//мы убрали props так как store из контехта 22cт.
 //     return (
-//         <div className={s.dialogs}>
-//             <div className={s.dialogsItems}>
-//                 {state.dialogs.map(m => <DialogItem name={m.name} id={m.id}/>)}
-//             </div>
+//         <StoreContext.Consumer>
+//             {
+//                 (store) => {
+//                     let state =store.getState().dialogsPage
 //
-//             <div className={s.messages}>
-//                 <div>{state.messages.map(m => <Message message={m.message} id={m.id}/>)}</div>
-//                 <div>
-//                     <div><textarea
-//                         value={newMessageBody}
-//                         placeholder={'Enter your message'}
-//                         onChange={onNewMessageChange}
-//                     ></textarea></div>
-//                     <div>
-//                         <button onClick={onSendMessageClick}>Send</button>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
+//                     let newMessageBody = state.newMessageBody
+//                     let onSendMessageClick = () => {
+//                         store.dispatch(sendMessageCreator())
+//                     }
+//                     let updateNewMessageBody = (body: string) => {
+//
+//                         store.dispatch(updateNewMessageBodyCreator(body))
+//                     }
+//                     return (<Dialogs sendMessage={onSendMessageClick}
+//                                      updateNewMessageBody={updateNewMessageBody}
+//                                      store={store}
+//                                      dialogsPage={state}
+//                     />)
+//                 }
+//             }
+//         </StoreContext.Consumer>
 //     )
 // }
-//
-// export default Dialogs;
+
+const mapStatetoProps=(state:istate)=>{
+    return{
+        dialogsPage:state.dialogsPage
+    }
+}
+
+const mapDispatchToProps=(dispatch:Dispatch)=>{
+    return{
+        sendMessage:()=>{
+            dispatch(sendMessageCreator())
+        },
+        updateNewMessageBody:(body:string)=>{
+            dispatch(updateNewMessageBodyCreator(body))
+        }
+    }
+}
+
+
+
+let DialogsContainer = connect(mapStatetoProps,mapDispatchToProps)(Dialogs)
+export default DialogsContainer;

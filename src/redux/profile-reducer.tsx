@@ -13,22 +13,26 @@ let initialState= {
 
 const profileReducer = (state: iprofilePage=initialState, action: ActionsTypes) => {
     switch (action.type) {
-        case addPost:
+        case addPost: {
             let newPost = {
                 id: 5,
                 message: state.newPostText,
                 likesCount: 0
             }
-            state.posts.push(newPost)
-            state.newPostText = '';
-            return state;
+            let stateCopy={...state}
+            stateCopy.posts.push(newPost)
+            stateCopy.newPostText = '';
+            return stateCopy;
+        }
+        case updateNewPostText: {
+            let stateCopy={...state}
 
-        case updateNewPostText:
-            state.newPostText = action.newText;
-            return state;
-
+            stateCopy.newPostText = action.newText;
+            return stateCopy;
+        }
         default:
-            return state;
+            let stateCopy={...state}
+            return stateCopy;
     }
    }
 
