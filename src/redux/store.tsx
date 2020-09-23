@@ -14,7 +14,7 @@ export type imessages = {
 export type idialogsPage = {
     messages: Array<imessages>
     dialogs: Array<idialogs>,
-    newMessageBody: string
+    newMessageBody: any
 
 }
 export type iposts = {

@@ -18,20 +18,22 @@ const profileReducer = (state: iprofilePage=initialState, action: ActionsTypes) 
                 id: 5,
                 message: state.newPostText,
                 likesCount: 0
-            }
-            let stateCopy={...state}
-            stateCopy.posts.push(newPost)
-            stateCopy.newPostText = '';
-            return stateCopy;
+            };
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostText: '',
+            };
         }
-        case updateNewPostText: {
-            let stateCopy={...state}
-
-            stateCopy.newPostText = action.newText;
-            return stateCopy;
+        case  updateNewPostText: {
+            return {
+                ...state,
+                posts: [...state.posts],
+                newPostText: action.newText
+            };
         }
         default:
-            let stateCopy={...state}
+            let stateCopy = {...state};
             return stateCopy;
     }
    }
