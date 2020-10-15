@@ -14,7 +14,7 @@ export type imessages = {
 export type idialogsPage = {
     messages: Array<imessages>
     dialogs: Array<idialogs>,
-    newMessageBody: any
+    newMessageBody: string
 
 }
 export type iposts = {
@@ -57,6 +57,8 @@ export type SendMessageType = {
 }
 
 export type ActionsTypes = AddPostActionType | updateNewPostTextActionType | updateNewMessageBodyType | SendMessageType
+
+
 
 let store: StoreType = {
     _state: {
@@ -104,8 +106,7 @@ let store: StoreType = {
     }
 }
 
-export type DialogsContainerType= SendMessageType|updateNewMessageBodyType
-export type myPostContainerType= AddPostActionType|updateNewMessageBodyType
+
 export default store;
 
 //===================================

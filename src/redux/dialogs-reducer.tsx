@@ -24,21 +24,21 @@ let initialState = {
 const dialogsReducer = (state: idialogsPage = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case updateNewMessageBody: {
-            let stateCopy = {...state}
-            stateCopy.newMessageBody = action.body;
-            return stateCopy
+            return {
+                ...state,
+                newMessageBody: action.body
+            };
         }
         case SendMessage: {
-            let stateCopy = {...state}
-            let body = stateCopy.newMessageBody;
-            stateCopy.newMessageBody = '';
-            stateCopy.messages = [...stateCopy.messages]
-            stateCopy.messages.push({id: 6, message: body});
-            return stateCopy;
+            let body = state.newMessageBody;
+            return {
+                ...state,
+                newMessageBody: '',
+                messages: [...state.messages, {id: 6, message: body}],
+            };
         }
         default:
-            let stateCopy = {...state}
-            return stateCopy;
+            return state;
     }
 }
 
@@ -56,21 +56,3 @@ export let updateNewMessageBodyCreator = (body: string): updateNewMessageBodyTyp
 }
 
 export default dialogsReducer;
-//======================
-// import {ActionsTypes, istate} from "./state";
-//
-// const updateNewMessageBody = 'update-New-Message-Body';
-// const SendMessage = 'Send-Message';
-//
-// const dialogsReducer = (state: istate, action: ActionsTypes) => {
-//     if (action.type == updateNewMessageBody) {
-//         state.dialogsPage.newMessageBody = action.body
-//     } else if (action.type = SendMessage) {
-//         let body = state.dialogsPage.newMessageBody;
-//         state.dialogsPage.newMessageBody = '';
-//         state.dialogsPage.messages.push({id: 6, message: body});
-//     }
-//     return state
-// }
-//
-// export default dialogsReducer;

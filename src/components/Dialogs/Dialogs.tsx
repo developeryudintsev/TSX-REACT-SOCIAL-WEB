@@ -4,6 +4,7 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {idialogsPage} from '../../redux/store'
 
+
 type DialogGeneralState = {
     dialogsPage:idialogsPage
     sendMessage:()=>void
@@ -11,14 +12,11 @@ type DialogGeneralState = {
 }
 
 let Dialogs = (props: DialogGeneralState) => {
-
     let state = props.dialogsPage
     let newMessageBody = state.newMessageBody;
-
     let onSendMessageClick = () => {
         props.sendMessage();
     }
-
     let onNewMessageChange = (event:ChangeEvent<HTMLTextAreaElement>) => {
         let body = event.currentTarget.value;
         props.updateNewMessageBody(body)

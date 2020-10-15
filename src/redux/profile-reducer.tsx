@@ -3,7 +3,7 @@ import {ActionsTypes, AddPostActionType, iprofilePage, updateNewPostTextActionTy
 const addPost = 'ADD-POST';
 const updateNewPostText = 'UPDATE-NEW-POST-TEXT';
 
-let initialState= {
+let initialState = {
     posts: [
         {id: 1, message: 'Hi', likesCount: 10},
         {id: 2, message: 'How are you?', likesCount: 100},
@@ -11,7 +11,7 @@ let initialState= {
     newPostText: 'it-kamasutra.com'
 }
 
-const profileReducer = (state: iprofilePage=initialState, action: ActionsTypes) => {
+const profileReducer = (state: iprofilePage = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case addPost: {
             let newPost = {
@@ -33,17 +33,16 @@ const profileReducer = (state: iprofilePage=initialState, action: ActionsTypes) 
             };
         }
         default:
-            let stateCopy = {...state};
-            return stateCopy;
+            return state;
     }
-   }
+}
 
-export let addPostActionCreator = ():AddPostActionType => {
+export let addPostActionCreator = (): AddPostActionType => {
     return {
         type: addPost
     }
 }
-export let newPostElementCreator = (text: string):updateNewPostTextActionType => {
+export let newPostElementCreator = (text: string): updateNewPostTextActionType => {
     return {
         type: updateNewPostText,
         newText: text

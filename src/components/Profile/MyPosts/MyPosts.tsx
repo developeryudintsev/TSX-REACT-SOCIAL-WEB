@@ -2,18 +2,8 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import Post from "./Post/Post";
 import {addPostActionCreator, newPostElementCreator} from "../../../redux/profile-reducer";
-import {ActionsTypes, iposts} from "../../../redux/store";
+import { iposts} from "../../../redux/store";
 
-// type generalType = {
-//     profilePosts: Array<posts>
-//     dispatch: (action: any) => void
-//     newPostText: string
-// }
-// type posts = {
-//     id: number,
-//     message: string,
-//     likesCount: number
-// }
 
 type generalType = {
     updateNewPostText:(text:string)=>void
@@ -26,14 +16,12 @@ const MyPosts = (props: generalType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>();
     let addPost = () => {
         props.addPost();
-        // props.dispatch(addPostActionCreator())
-    }
+       }
     let onPostChange = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
             props.updateNewPostText(text)
-            // props.dispatch(newPostElementCreator(text))
-        }
+                   }
     }
 
 
