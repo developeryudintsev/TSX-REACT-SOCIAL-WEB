@@ -11,3 +11,13 @@
     margin:10px;
     color: white;
 }
+.pages{
+    margin: 7px;
+    color: white;
+}
+
+.selectedPage{
+    margin: 7px;
+    color: yellow;
+    font-weight: bold;
+}
