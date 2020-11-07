@@ -3,12 +3,14 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
+const TOGGLE_IS_FETCHING="TOGGLE_IS_FETCHING";
 
 export type initialStateType = {
     users: Array<usersType>,
     pageSize:number,
     totalUserscount:number
     currentPage:number
+    isFetching:boolean
 }
 export type usersType = {
     id: number
@@ -26,10 +28,12 @@ let initialState: initialStateType = {
     users: [],
     pageSize:100,
     totalUserscount:0,
-    currentPage:4
+    currentPage:4,
+    isFetching:false
+
 }
 
-type actionType=    FollowActionType | UnFollowActionType | SetUsersActionType|SetUsersPageActionType|setTotalUsersCounActionType
+type actionType=    FollowActionType | UnFollowActionType | SetUsersActionType|SetUsersPageActionType|setTotalUsersCounActionType|toggleIsFetchingACType
 
 const usersReducer = (state= initialState, action: actionType): initialStateType => {
     switch (action.type) {
@@ -62,6 +66,9 @@ const usersReducer = (state= initialState, action: actionType): initialStateType
         case SET_TOTAL_USERS_COUNT:{
             return {...state,totalUserscount:action.count}
         }
+        case TOGGLE_IS_FETCHING:{
+            return {...state,isFetching:action.isFetching}
+        }
         default:
             return state;
     }
@@ -87,18 +94,23 @@ export type setTotalUsersCounActionType = {
     type: 'SET_TOTAL_USERS_COUNT',
     count: number
 }
+export type toggleIsFetchingACType = {
+    type: 'TOGGLE_IS_FETCHING',
+    isFetching: boolean
+}
 
-export let followAC = (userID: number): FollowActionType => ({type: FOLLOW, userID})
-export let unfollowAC = (userID: number): UnFollowActionType => {
+export let follow = (userID: number): FollowActionType => ({type: FOLLOW, userID})
+export let unfollow = (userID: number): UnFollowActionType => {
     return {
         type: UNFOLLOW,
         userID
     }
 }
-export let setUsersAC = (users: Array<usersType>) => ({type: SET_USERS, users})
-export let setCurrentPageAC = (currentPage:number):SetUsersPageActionType => ({type: SET_CURRENT_PAGE, currentPage:currentPage})
-export let setTotalUsersCountAC = (totalUsersCount:number):setTotalUsersCounActionType => ({type: SET_TOTAL_USERS_COUNT, count:totalUsersCount})
-
+export let setUsers = (users: Array<usersType>) => ({type: SET_USERS, users})
+export let setCurrentPage = (currentPage:number):SetUsersPageActionType => ({type: SET_CURRENT_PAGE, currentPage:currentPage})
+export let setTotalUsersCount = (totalUsersCount:number):setTotalUsersCounActionType => ({type: SET_TOTAL_USERS_COUNT, count:totalUsersCount})
+// export let setIsFetchingAC = (isFetching:boolean) => ({type: TOGGLE_IS_FETCHING, isFetching})
+export let toggleIsFetching=(isFetching:boolean):toggleIsFetchingACType => ({type: TOGGLE_IS_FETCHING, isFetching:isFetching})
 export default usersReducer;
 //=========================================================================================
 // const FOLLOW = 'FOLLOW';

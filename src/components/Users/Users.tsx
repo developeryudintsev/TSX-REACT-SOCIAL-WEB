@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './Users.module.css'
 import {usersType} from "../../redux/users-reducer";
-import axios from 'axios'
 
 type PropsType={
     pageSize:number,
