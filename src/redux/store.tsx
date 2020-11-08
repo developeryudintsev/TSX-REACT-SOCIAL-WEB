@@ -25,6 +25,7 @@ export type iposts = {
 export type iprofilePage = {
     posts: Array<iposts>
     newPostText: string
+    profile:any
 }
 export type isidebar = {}
 export type istate = {
@@ -46,6 +47,10 @@ export type updateNewPostTextActionType = {
     type: 'UPDATE-NEW-POST-TEXT',
     newText: string
 }
+export type setUserProfileActionType = {
+    type: 'SET_USER_PROFILE',
+    profile: any
+}
 
 export type updateNewMessageBodyType = {
     type: 'update-New-Message-Body'
@@ -56,7 +61,8 @@ export type SendMessageType = {
     type: 'Send-Message'
 }
 
-export type ActionsTypes = AddPostActionType | updateNewPostTextActionType | updateNewMessageBodyType | SendMessageType
+export type ActionsTypes = AddPostActionType | updateNewPostTextActionType | updateNewMessageBodyType
+    | SendMessageType |setUserProfileActionType
 
 
 
@@ -67,7 +73,8 @@ let store: StoreType = {
                 {id: 1, message: 'Hi', likesCount: 10},
                 {id: 2, message: 'How are you?', likesCount: 100},
             ],
-            newPostText: 'it-kamasutra.com'
+            newPostText: 'it-kamasutra.com',
+            profile:null
         },
         dialogsPage: {
             messages: [

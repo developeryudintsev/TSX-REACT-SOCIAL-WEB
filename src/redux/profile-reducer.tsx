@@ -1,15 +1,50 @@
-import {ActionsTypes, AddPostActionType, iprofilePage, updateNewPostTextActionType} from "./store";
+import {
+    ActionsTypes,
+    AddPostActionType,
+    iprofilePage,
+    setUserProfileActionType,
+    updateNewPostTextActionType
+} from "./store";
 
 const addPost = 'ADD-POST';
 const updateNewPostText = 'UPDATE-NEW-POST-TEXT';
+const SET_USER_PROFILE='SET_USER_PROFILE';
 
 let initialState = {
     posts: [
         {id: 1, message: 'Hi', likesCount: 10},
         {id: 2, message: 'How are you?', likesCount: 100},
     ],
-    newPostText: 'it-kamasutra.com'
+    newPostText: 'it-kamasutra.com',
+    profile:null
 }
+type contactsType={
+    facebook: string
+    website: string
+    vk: string
+    twitter: string
+    instagram: string
+    youtube: string
+    github: string
+    mainLink: string
+}
+type photosType={
+    small: string
+    large: string
+}
+export type profileType={
+    aboutMe: string
+    contacts:contactsType
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: photosType
+}
+// export type propsProfileType=
+//     {
+//         profile:profileType
+//     }
 
 const profileReducer = (state: iprofilePage = initialState, action: ActionsTypes) => {
     switch (action.type) {
@@ -32,6 +67,9 @@ const profileReducer = (state: iprofilePage = initialState, action: ActionsTypes
                 newPostText: action.newText
             };
         }
+        case SET_USER_PROFILE:{
+            return {...state,profile:action.profile}
+        }
         default:
             return state;
     }
@@ -42,6 +80,13 @@ export let addPostActionCreator = (): AddPostActionType => {
         type: addPost
     }
 }
+export let setUserProfile = (profile:profileType):setUserProfileActionType => {
+    return {
+        type: SET_USER_PROFILE,
+        profile
+    }
+}
+
 export let newPostElementCreator = (text: string): updateNewPostTextActionType => {
     return {
         type: updateNewPostText,
@@ -50,26 +95,3 @@ export let newPostElementCreator = (text: string): updateNewPostTextActionType =
 }
 
 export default profileReducer;
-
-//==================================
-// import {ActionsTypes, istate} from "./state";
-//
-// const addPost = 'ADD-POST';
-// const updateNewPostText = 'UPDATE-NEW-POST-TEXT';
-//
-// const profileReducer = (state: istate, action: ActionsTypes) => {
-//     if (action.type === addPost) {
-//         let newPost = {
-//             id: 5,
-//             message: state.profilePage.newPostText,
-//             likesCount: 0
-//         }
-//         state.profilePage.posts.push(newPost)
-//         state.profilePage.newPostText = '';
-//
-//     } else if (action.type === updateNewPostText) {
-//         state.profilePage.newPostText = action.newText
-//     }
-//     return state
-// }
-// export default profileReducer;

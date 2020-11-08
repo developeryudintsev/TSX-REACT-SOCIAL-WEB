@@ -7,3 +7,4 @@ export let Preloader=()=>{
         <img  className={styles.img} src={preloader}/>
     </div>
 }
+export default Preloader

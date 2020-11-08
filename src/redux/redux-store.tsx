@@ -12,5 +12,7 @@ let reducers = combineReducers({
 });
 let store: Store = createStore(reducers);//типизация из redux для Store
 export type AppStateType = ReturnType<typeof reducers>//это типизация state всего приложения
+//@ts-ignore
+window.store=store;
 
 export default store;
