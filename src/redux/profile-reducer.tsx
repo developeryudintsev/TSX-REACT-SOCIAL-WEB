@@ -6,18 +6,7 @@ import {
     updateNewPostTextActionType
 } from "./store";
 
-const addPost = 'ADD-POST';
-const updateNewPostText = 'UPDATE-NEW-POST-TEXT';
-const SET_USER_PROFILE='SET_USER_PROFILE';
 
-let initialState = {
-    posts: [
-        {id: 1, message: 'Hi', likesCount: 10},
-        {id: 2, message: 'How are you?', likesCount: 100},
-    ],
-    newPostText: 'it-kamasutra.com',
-    profile:null
-}
 type contactsType={
     facebook: string
     website: string
@@ -41,10 +30,23 @@ export type profileType={
     userId: number
     photos: photosType
 }
-// export type propsProfileType=
-//     {
-//         profile:profileType
-//     }
+export type propsProfileType=
+    {
+        profile:profileType
+    }
+
+const addPost = 'ADD-POST';
+const updateNewPostText = 'UPDATE-NEW-POST-TEXT';
+const SET_USER_PROFILE='SET_USER_PROFILE';
+
+let initialState = {
+    posts: [
+        {id: 1, message: 'Hi', likesCount: 10},
+        {id: 2, message: 'How are you?', likesCount: 100},
+    ],
+    newPostText: 'it-kamasutra.com',
+    profile:null
+}
 
 const profileReducer = (state: iprofilePage = initialState, action: ActionsTypes) => {
     switch (action.type) {
