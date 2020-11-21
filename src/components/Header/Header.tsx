@@ -7,7 +7,6 @@ type HeaderType = {
     isAuth: boolean,
 }
 const Header = (props:HeaderType) => {
-
     return <>
         <header className={s.header}>
             <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/170px-Apple_logo_white.svg.png'/>

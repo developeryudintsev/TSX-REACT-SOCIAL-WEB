@@ -20,15 +20,15 @@ class HeaderContainer extends React.Component<initialStateTypes> {
         axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`,
             {withCredentials: true})
             .then(response => {
-                debugger
                 if (response.data.resultCode === 0) {
+
                     this.props.setAuthUserDataAC(response.data.data);
                 }
             })
     }
 
     render() {
-        return <Header {...this.props}/>
+             return <Header {...this.props}/>
     }
 }
 
