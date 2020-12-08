@@ -14,10 +14,9 @@ let initialState: initialStateType = {
 }
 
 
-const authReducer = (state:initialStateType = initialState, action: setUserDataACType): initialStateType => {
+const authReducer = (state: initialStateType = initialState, action: setUserDataACType): initialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
-            console.log('dfsdfппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппппп')
             return {
                 ...state,
                 ...action.data,
