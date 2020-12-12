@@ -4,13 +4,20 @@ import {sendMessageCreator, updateNewMessageBodyCreator} from './../../redux/dia
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import { istate} from "../../redux/store";
+import {initialStateType} from "../../redux/auth-reducer";
+import {AppStateType} from "../../redux/redux-store";
+
+type DialogsContainerType={
+    state:istate
+    auth:initialStateType
+}
 
 
-
-const mapStatetoProps=(state:istate)=>{
-    return{
-        dialogsPage:state.dialogsPage
-    }
+const mapStatetoProps=(state:AppStateType)=>{
+      return{
+        dialogsPage:state.dialogsPage,
+        isAuth: state.auth.isAuth
+          }
 }
 
 const mapDispatchToProps=(dispatch:Dispatch)=>{
