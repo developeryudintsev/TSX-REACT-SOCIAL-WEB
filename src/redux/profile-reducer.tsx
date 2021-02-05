@@ -5,9 +5,11 @@ import {
     setUserProfileActionType,
     updateNewPostTextActionType
 } from "./store";
+import {usersAPI} from "../api/api";
+import {AppStateType} from "./redux-store";
 
 
-type contactsType={
+type contactsType = {
     facebook: string
     website: string
     vk: string
@@ -17,27 +19,28 @@ type contactsType={
     github: string
     mainLink: string
 }
-type photosType={
+type photosType = {
     small: string
     large: string
 }
-export type profileType={
+export type profileType = {
     aboutMe: string
-    contacts:contactsType
+    contacts: contactsType
     lookingForAJob: boolean,
     lookingForAJobDescription: string
     fullName: string
     userId: number
     photos: photosType
+    isAuth:boolean
 }
-export type propsProfileType=
+export type propsProfileType =
     {
-        profile:profileType
-    }
+        profile: profileType,
+        }
 
 const addPost = 'ADD-POST';
 const updateNewPostText = 'UPDATE-NEW-POST-TEXT';
-const SET_USER_PROFILE='SET_USER_PROFILE';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 let initialState = {
     posts: [
@@ -45,7 +48,7 @@ let initialState = {
         {id: 2, message: 'How are you?', likesCount: 100},
     ],
     newPostText: 'it-kamasutra.com',
-    profile:null
+    profile: null
 }
 
 const profileReducer = (state: iprofilePage = initialState, action: ActionsTypes) => {
@@ -69,8 +72,8 @@ const profileReducer = (state: iprofilePage = initialState, action: ActionsTypes
                 newPostText: action.newText
             };
         }
-        case SET_USER_PROFILE:{
-            return {...state,profile:action.profile}
+        case SET_USER_PROFILE: {
+            return {...state, profile: action.profile}
         }
         default:
             return state;
@@ -82,11 +85,17 @@ export let addPostActionCreator = (): AddPostActionType => {
         type: addPost
     }
 }
-export let setUserProfile = (profile:profileType):setUserProfileActionType => {
+export let setUserProfile = (profile: profileType): setUserProfileActionType => {
     return {
         type: SET_USER_PROFILE,
         profile
     }
+}
+
+export const getUserProfile = (userId: any) => (dispatch: any) => {
+    usersAPI.getProfile(userId).then(response => {
+        dispatch(setUserProfile(response.data));
+    });
 }
 
 export let newPostElementCreator = (text: string): updateNewPostTextActionType => {

@@ -2,6 +2,7 @@ import React from 'react';
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import sideBarReducer from "./sideBar-reducer";
+import {initialStateType} from "./auth-reducer";
 
 export type idialogs = {
     id: number,
@@ -31,8 +32,8 @@ export type isidebar = {}
 export type istate = {
     profilePage: iprofilePage,
     dialogsPage: idialogsPage,
-    sidebar: isidebar
-}
+    sidebar: isidebar,
+  }
 export type StoreType = {
     _state: istate
     _callSubscriber: (state: istate) => void
