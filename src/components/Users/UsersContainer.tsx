@@ -11,6 +11,8 @@ import {
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 export type initialStateType = {
     users: Array<usersType>,
@@ -21,7 +23,6 @@ export type initialStateType = {
     unfollow: (id: number) => void,
     setCurrentPage: (currentPage: number) => void,
     isFetching: boolean
-    // toggleFollowingProgress: (isFetching: boolean, userID: number) => void
     followingInProgress: Array<any>
     getUsers: (currentPage: number, pageSize: number) => void
 
@@ -48,7 +49,6 @@ class UsersContainer extends React.Component<initialStateType> {
                     unfollow={this.props.unfollow}
                     follow={this.props.follow}
                     users={this.props.users}
-                    // toggleFollowingProgress={this.props.toggleFollowingProgress}
                     followingInProgress={this.props.followingInProgress}
                 />
             </>
@@ -67,8 +67,14 @@ function mapStateToProps(state: AppStateType) {
     }
 }
 
-export default connect(mapStateToProps, {
-    follow, unfollow,
-    setCurrentPage,
-    toggleFollowingProgress, getUsers
-})(UsersContainer);
+// export default connect(mapStateToProps, {
+//     follow, unfollow,
+//     setCurrentPage,
+//     toggleFollowingProgress, getUsers
+// })(UsersContainer);
+
+
+export default compose<React.ComponentType>(
+    withAuthRedirect,
+    connect(mapStateToProps, {follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers}))
+(UsersContainer)

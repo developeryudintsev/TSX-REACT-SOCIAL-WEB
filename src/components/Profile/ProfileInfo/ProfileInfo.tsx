@@ -3,6 +3,8 @@ import s from './ProfileInfo.module.css';
 import {Preloader} from "../../common/Preloader/Preloader";
 import styles from "./ProfileInfo.module.css";
 import {propsProfileType} from "../../../redux/profile-reducer";
+import {ProfileStatus} from "./ProfileStatus";
+
 
 const ProfileInfo = (props:propsProfileType) => {
 
@@ -20,7 +22,7 @@ const ProfileInfo = (props:propsProfileType) => {
                     : 'https://e7.pngegg.com/pngimages/613/636/png-clipart-computer-icons-user-profile-male-avatar-avatar-heroes-logo.png'}
                      className={styles.picture}
                 />
-                ava+description
+                <ProfileStatus status={'Hellow my friends'}/>
             </div>
         </div>
     )
