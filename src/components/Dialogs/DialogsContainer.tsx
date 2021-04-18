@@ -1,13 +1,13 @@
 import React from 'react';
 import {compose, Dispatch} from 'redux';
-import {sendMessageCreator } from './../../redux/dialogs-reducer'
 import Dialogs, {DialogGeneralState} from "./Dialogs";
 import {connect} from "react-redux";
-import { istate} from "../../redux/store";
-import {initialStateType} from "../../redux/auth-reducer";
+import {istate} from "../../redux/store";
+import {initialStateType} from "../Users/UsersContainer";
 import {AppStateType} from "../../redux/redux-store";
-import {Redirect} from "react-router";
+import {sendMessageCreator} from "../../redux/dialogs-reducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+
 type DialogsContainerType={
     state:istate
     auth:initialStateType
