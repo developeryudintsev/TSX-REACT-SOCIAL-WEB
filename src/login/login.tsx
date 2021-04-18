@@ -4,21 +4,27 @@ import {Field, reduxForm} from "redux-form";
 import styles from "../components/common/FormsControls/FormsControls.module.css";
 import {Input} from "../components/common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../utilites/validators/validators";
+import {connect} from "react-redux";
+import {initialStateType, login} from "../redux/auth-reducer";
+import {Redirect} from "react-router";
+import {StoreType} from "../redux/store";
+import {AppStateType} from "../redux/redux-store";
 
 type FormDataType = {
-    login: string,
+    email: string,
     password: string,
     rememberMe: boolean,
 }
-let maxLength20=maxLengthCreator(20)
+
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={'Login'} name={'login'} component={Input}  validate={[required,maxLength20]}/>
+                <Field placeholder={'Email'} name={'email'} component={Input}  validate={[required]}/>
             </div>
             <div>
-                <Field placeholder={'Password'} name={'password'} component={Input}  validate={[required,maxLength20]}/>
+                <Field placeholder={'Password'} name={'password'} component={Input}
+                       type={"password"} validate={[required]}/>
             </div>
             <div>
                 <Field type={'checkbox'} name={'rememberMe'} component={Input}/> remember me
@@ -29,11 +35,14 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
         </form>
     )
 }
-
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
-export const Login = () => {
+
+export const Login = (props:any) => {
     const onSubmit = (formData: FormDataType) => {
-        console.log(formData)
+        props.login(formData.email,formData.password,formData.rememberMe)
+    }
+    if(props.isAuth){
+         return  <Redirect to={'/profile'}/>
     }
     return (
         <div>
@@ -43,4 +52,7 @@ export const Login = () => {
     )
 }
 
-export default Login;
+const mapStateToProps=(state:AppStateType)=>({
+    isAuth:state.auth.isAuth
+})
+export default  connect(mapStateToProps,{login}) (Login);

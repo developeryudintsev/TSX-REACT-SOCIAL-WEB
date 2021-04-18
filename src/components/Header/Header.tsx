@@ -5,6 +5,7 @@ import {NavLink} from "react-router-dom";
 type HeaderType = {
     login: string | null,
     isAuth: boolean,
+    logout:()=>void
 }
 const Header = (props:HeaderType) => {
     return <>
@@ -12,7 +13,8 @@ const Header = (props:HeaderType) => {
             <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/170px-Apple_logo_white.svg.png'/>
             <div className={s.loginBlock}>
                 {props.isAuth
-                    ?props.login
+                    //в шапке появляется Log out
+                    ?<div>{props.login} : <button onClick={props.logout}>Log out</button></div>
                     :<NavLink  to={'/login'}>Login</NavLink>
                 }
             </div>
@@ -21,3 +23,8 @@ const Header = (props:HeaderType) => {
 }
 
 export default Header;
+
+
+
+
+
