@@ -5,7 +5,6 @@ import styles from "./ProfileInfo.module.css";
 import {propsProfileType} from "../../../redux/profile-reducer";
 import {ProfileStatus} from "./ProfileStatus";
 
-
 const ProfileInfo = (props:propsProfileType) => {
 
     if(!props.profile){

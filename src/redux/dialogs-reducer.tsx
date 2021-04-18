@@ -1,6 +1,4 @@
 import {ActionsTypes, idialogsPage, SendMessageType, updateNewMessageBodyType} from "./store";
-
-const updateNewMessageBody = 'update-New-Message-Body';
 const SendMessage = 'Send-Message';
 
 let initialState = {
@@ -18,41 +16,39 @@ let initialState = {
         {id: 4, name: 'Olga'},
         {id: 5, name: 'Nadzeika'},
     ],
-    newMessageBody: ''
+    // newMessageBody: ''//убираем
 }
 
 const dialogsReducer = (state: idialogsPage = initialState, action: ActionsTypes) => {
     switch (action.type) {
-        case updateNewMessageBody: {
-            return {
-                ...state,
-                newMessageBody: action.body
-            };
-        }
+        //  Больше не нужен updateNewMessageBody
+        // case updateNewMessageBody: {
+        //     return {
+        //         ...state,
+        //         newMessageBody: action.body
+        //     };
+        // }
         case SendMessage: {
-            let body = state.newMessageBody;
+            let body = action.newMessageBody;
             return {
                 ...state,
-                newMessageBody: '',
+                // newMessageBody: '',
                 messages: [...state.messages, {id: 6, message: body}],
             };
         }
-        default:
-            return state;
-    }
-}
-
-
-export let sendMessageCreator = (): SendMessageType => {
+        default: return state;
+    }}
+export let sendMessageCreator = (newMessageBody: string): SendMessageType => {
     return {
-        type: SendMessage
+        type: SendMessage,
+        newMessageBody: newMessageBody
     }
 }
-export let updateNewMessageBodyCreator = (body: string): updateNewMessageBodyType => {
-    return {
-        type: updateNewMessageBody,
-        body: body
-    }
-}
-
+//  Больше не нужен updateNewMessageBodyCreator
+// export let updateNewMessageBodyCreator = (body: string): updateNewMessageBodyType => {
+//     return {
+//         type: updateNewMessageBody,
+//         body: body
+//     }
+// }
 export default dialogsReducer;

@@ -19,5 +19,4 @@ const Profile = (props:propsType) => {
     )
 }
 
-
 export default Profile;

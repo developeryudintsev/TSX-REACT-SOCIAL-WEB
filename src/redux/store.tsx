@@ -15,8 +15,7 @@ export type imessages = {
 export type idialogsPage = {
     messages: Array<imessages>
     dialogs: Array<idialogs>,
-    newMessageBody: string
-
+    // newMessageBody: string
 }
 export type iposts = {
     id: number,
@@ -25,7 +24,7 @@ export type iposts = {
 }
 export type iprofilePage = {
     posts: Array<iposts>
-    newPostText: string
+    // newPostText: string
     profile:any
     status:string
 }
@@ -44,6 +43,7 @@ export type StoreType = {
 }
 export type AddPostActionType = {
     type: 'ADD-POST',
+    newPostText:string
 }
 export type updateNewPostTextActionType = {
     type: 'UPDATE-NEW-POST-TEXT',
@@ -57,20 +57,16 @@ export type setStatusAC={
     type: 'SET_STATUS',
     status: string
 }
-
 export type updateNewMessageBodyType = {
     type: 'update-New-Message-Body'
     body: string
 }
-
 export type SendMessageType = {
-    type: 'Send-Message'
+    type: 'Send-Message',
+    newMessageBody:string
 }
-
 export type ActionsTypes = AddPostActionType | updateNewPostTextActionType | updateNewMessageBodyType
     | SendMessageType |setUserProfileActionType|setStatusAC
-
-
 
 let store: StoreType = {
     _state: {
@@ -79,7 +75,7 @@ let store: StoreType = {
                 {id: 1, message: 'Hi', likesCount: 10},
                 {id: 2, message: 'How are you?', likesCount: 100},
             ],
-            newPostText: 'it-kamasutra.com',
+            // newPostText: 'it-kamasutra.com',
             profile:null,
             status:''
         },
@@ -98,7 +94,7 @@ let store: StoreType = {
                 {id: 4, name: 'Olga'},
                 {id: 5, name: 'Nadzeika'},
             ],
-            newMessageBody: ''
+            // newMessageBody: ''
         },
         sidebar: {}
     },
@@ -111,7 +107,6 @@ let store: StoreType = {
     subscribe(observer: (state: istate) => void) {
         this._callSubscriber = observer
     },
-
     dispatch(action) {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
@@ -120,5 +115,14 @@ let store: StoreType = {
     }
 }
 
-
 export default store;
+
+
+
+
+
+
+
+
+
+

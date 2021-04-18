@@ -1,5 +1,4 @@
 import React, {ChangeEvent} from 'react';
-
 type propsType = {
     status: string
     updateStatus: (status: string) => void
@@ -10,7 +9,6 @@ export class ProfileStatus extends React.Component <propsType> {
         editMode: false,
         status: this.props.status
     }
-
     activateEditeMode = () => {
         this.setState(
             {
@@ -18,7 +16,6 @@ export class ProfileStatus extends React.Component <propsType> {
             }
         )
     }
-
     deActivateEditeMode = () => {
         this.setState({
                 editMode: false
@@ -26,22 +23,22 @@ export class ProfileStatus extends React.Component <propsType> {
         )
         this.props.updateStatus(this.state.status)
     }
-        onStatusChange=(event:ChangeEvent<HTMLInputElement> )=>{
+    onStatusChange = (event: ChangeEvent<HTMLInputElement>) => {
         this.setState({
-                status:event.currentTarget.value
+                status: event.currentTarget.value
             }
         )
     }
 
-    componentDidUpdate(prevProps:any,prevState:any) {
-        if(prevProps.status!==this.props.status) {
+
+    componentDidUpdate = (prevProps:propsType, prevState:propsType) => {
+        if (prevProps.status !== this.props.status) {
+            //сравниваем старые пропсы с новыми
             this.setState({
-                state: this.props.status
+                //новым статусом заапдейтим старый статус
+                status: this.props.status
             })
         }
-        let a=this.state
-        let b=this.props
-        console.log('')
     }
 
     render() {
@@ -53,7 +50,7 @@ export class ProfileStatus extends React.Component <propsType> {
                     : <input
                         onChange={this.onStatusChange}
                         onBlur={this.deActivateEditeMode} autoFocus={true}
-                             value={this.state.status}/>
+                        value={this.state.status}/>
                 }
             </div>
         )
