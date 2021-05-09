@@ -3,11 +3,10 @@ import {InjectedFormProps} from "redux-form";
 import {Field, reduxForm} from "redux-form";
 import styles from "../components/common/FormsControls/FormsControls.module.css";
 import {Input} from "../components/common/FormsControls/FormsControls";
-import {maxLengthCreator, required} from "../utilites/validators/validators";
+import { required} from "../utilites/validators/validators";
 import {connect} from "react-redux";
-import {initialStateType, login} from "../redux/auth-reducer";
+import { login} from "../redux/auth-reducer";
 import {Redirect} from "react-router";
-import {StoreType} from "../redux/store";
 import {AppStateType} from "../redux/redux-store";
 
 type FormDataType = {
@@ -18,7 +17,7 @@ type FormDataType = {
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={props.handleSubmit} className={styles.marginLeft}>
             <div>
                 <Field placeholder={'Email'} name={'email'} component={Input}  validate={[required]}/>
             </div>
@@ -26,9 +25,10 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                 <Field placeholder={'Password'} name={'password'} component={Input}
                        type={"password"} validate={[required]}/>
             </div>
-            <div>
-                <Field type={'checkbox'} name={'rememberMe'} component={Input}/> remember me
-            </div>
+            <span>
+            <Field type={'checkbox'} name={'rememberMe'} component={Input} className={styles.checkbox}/>
+            </span><span>remember me</span>
+            {props.error && <div  className={styles.formSummaryError}>{props.error}</div>}
             <div>
                 <button>Login</button>
             </div>
@@ -46,7 +46,7 @@ export const Login = (props:any) => {
     }
     return (
         <div>
-            <h1>LOGIN</h1>
+            <h1 className={styles.marginLeft}>LOGIN</h1>
             <LoginReduxForm onSubmit={onSubmit}/>
         </div>
     )
