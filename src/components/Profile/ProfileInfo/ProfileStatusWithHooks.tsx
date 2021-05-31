@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 
 type propsType = {
     status: string
@@ -8,6 +8,14 @@ type propsType = {
 export const ProfileStatusWithHooks = (props: propsType) => {
     let [editMode, setEditMode] = useState(false);
     let [status, setStatus] = useState(props.status)
+
+    //если пропсы поменятются запускай useEffect
+    useEffect(() => {
+        setStatus(props.status)
+        //вначале установилась пустота в инпуте
+        //а когда что-то впечатаем-useEffect сработает
+    }, [props.status])
+
     const activateMode = () => {
         setEditMode(true)
     }
