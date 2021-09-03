@@ -10,7 +10,6 @@ type generalType = {
     addPost: (newPostText:string) => void
     posts: Array<iposts>
  }
-
 //превращаем в стрелочн.функцию
 //мы решаем сделать тоже самое но в функциональной компоненте
 //при помощи React.memo
