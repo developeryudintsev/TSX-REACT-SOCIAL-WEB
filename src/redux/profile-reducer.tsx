@@ -1,13 +1,13 @@
 import {
     ActionsTypes,
     AddPostActionType,
-    iprofilePage,
+    iprofilePage, setStatusAC,
     setUserProfileActionType,
     updateNewPostTextActionType
 } from "./store";
-import {usersAPI} from "../api/api";
-
-
+import {profileAPI, usersAPI} from "../api/api";
+import {AppStateType} from "./redux-store";
+import {number} from "prop-types";
 type contactsType = {
     facebook: string
     website: string
@@ -30,24 +30,35 @@ export type profileType = {
     fullName: string
     userId: number
     photos: photosType
+    isAuth: boolean
 }
+
+export type statusUpdateType = {
+    resultCode: number
+    messages: Array<string>,
+    data: any
+}
+
 export type propsProfileType =
     {
         profile: profileType,
-        isAuth:boolean
+        status: string,
+        updateStatus: (status:string)=>void
     }
 
 const addPost = 'ADD-POST';
 const updateNewPostText = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_STATUS = 'SET_STATUS';
 
 let initialState = {
     posts: [
         {id: 1, message: 'Hi', likesCount: 10},
         {id: 2, message: 'How are you?', likesCount: 100},
     ],
-    newPostText: 'it-kamasutra.com',
-    profile: null
+    // newPostText: 'it-kamasutra.com',
+    profile: null,
+    status: ''
 }
 
 const profileReducer = (state: iprofilePage = initialState, action: ActionsTypes) => {
@@ -55,7 +66,7 @@ const profileReducer = (state: iprofilePage = initialState, action: ActionsTypes
         case addPost: {
             let newPost = {
                 id: 5,
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0
             };
             return {
@@ -64,11 +75,17 @@ const profileReducer = (state: iprofilePage = initialState, action: ActionsTypes
                 newPostText: '',
             };
         }
-        case  updateNewPostText: {
-            return {
+        // case  updateNewPostText: {
+        //     return {
+        //         ...state,
+        //         posts: [...state.posts],
+        //         newPostText: action.newText
+        //     };
+        // }
+        case  SET_STATUS: {
+                     return {
                 ...state,
-                posts: [...state.posts],
-                newPostText: action.newText
+                status: action.status
             };
         }
         case SET_USER_PROFILE: {
@@ -79,9 +96,10 @@ const profileReducer = (state: iprofilePage = initialState, action: ActionsTypes
     }
 }
 
-export let addPostActionCreator = (): AddPostActionType => {
+export let addPostActionCreator = (newPostText:string): AddPostActionType => {
     return {
-        type: addPost
+        type: addPost,
+        newPostText
     }
 }
 export let setUserProfile = (profile: profileType): setUserProfileActionType => {
@@ -90,18 +108,37 @@ export let setUserProfile = (profile: profileType): setUserProfileActionType => 
         profile
     }
 }
-
+export let setStatus = (status: string): setStatusAC => {
+    return {
+        type: SET_STATUS,
+        status
+    }
+}
 export const getUserProfile = (userId: any) => (dispatch: any) => {
     usersAPI.getProfile(userId).then(response => {
         dispatch(setUserProfile(response.data));
     });
 }
-
-export let newPostElementCreator = (text: string): updateNewPostTextActionType => {
-    return {
-        type: updateNewPostText,
-        newText: text
-    }
+//создаем санку
+export let getStatus = (userId: number) => (dispatch: any) => {
+    profileAPI.getStatus(userId)
+        .then(response => {
+        dispatch(setStatus(response.data))
+    })
 }
-
+export let updateStatus = (status: string) => (dispatch: any) => {
+    profileAPI.updateStatus(status)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setStatus(status))
+            }
+        })
+}
+// export let newPostElementCreator = (text: string): updateNewPostTextActionType => {
+//     return {
+//         type: updateNewPostText,
+//         newText: text
+//     }
+// }
 export default profileReducer;
+
