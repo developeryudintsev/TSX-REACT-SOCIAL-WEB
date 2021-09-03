@@ -5,12 +5,16 @@ import {iposts} from "../../../redux/store";
 import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utilites/validators/validators";
 import {Textarea} from "../../common/FormsControls/FormsControls";
+
 type generalType = {
     addPost: (newPostText:string) => void
     posts: Array<iposts>
  }
 
-const MyPosts = (props: generalType) => {
+//превращаем в стрелочн.функцию
+//мы решаем сделать тоже самое но в функциональной компоненте
+//при помощи React.memo
+const MyPosts = React.memo((props: generalType) => {
     let addPost = (values: any) => {
         props.addPost(values.newPostText);
     }
@@ -24,9 +28,11 @@ const MyPosts = (props: generalType) => {
             </div>
         </div>
     )
-}
+});
+
 
 let maxLength10=maxLengthCreator(10)
+
 
 let AddNewPostForm=(props: any)=> {
     return <form onSubmit={props.handleSubmit}>
@@ -42,6 +48,19 @@ let AddNewPostForm=(props: any)=> {
 let AddNewPostFormRedux = reduxForm({form: 'ProfileAddNewPostForm'})(AddNewPostForm)
 
 export default MyPosts;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

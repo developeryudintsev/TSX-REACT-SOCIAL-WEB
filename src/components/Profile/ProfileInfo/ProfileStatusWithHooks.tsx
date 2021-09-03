@@ -1,5 +1,4 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
-
 type propsType = {
     status: string
     updateStatus: (status: string) => void
@@ -7,7 +6,7 @@ type propsType = {
 
 export const ProfileStatusWithHooks = (props: propsType) => {
     let [editMode, setEditMode] = useState(false);
-    let [status, setStatus] = useState(props.status)
+    let [status, setStatus] = useState(props.status);
 
     //если пропсы поменятются запускай useEffect
     useEffect(() => {
@@ -15,6 +14,7 @@ export const ProfileStatusWithHooks = (props: propsType) => {
         //вначале установилась пустота в инпуте
         //а когда что-то впечатаем-useEffect сработает
     }, [props.status])
+
 
     const activateMode = () => {
         setEditMode(true)
@@ -27,17 +27,16 @@ export const ProfileStatusWithHooks = (props: propsType) => {
     const onStatusChange = (event: ChangeEvent<HTMLInputElement>) => {
         setStatus(event.currentTarget.value)
     }
-
     return (
         <div>
             {!editMode
                 ? <span onDoubleClick={activateMode}>
                        {props.status || '---'}
                    </span>
-                : <input  onChange={onStatusChange}
-                          onBlur={deActivateMode}
-                          autoFocus={true}
-                          value={status}
+                : <input onChange={onStatusChange}
+                         onBlur={deActivateMode}
+                         autoFocus={true}
+                         value={status}
                 />
             }
         </div>
