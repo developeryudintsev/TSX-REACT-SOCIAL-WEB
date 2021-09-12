@@ -31,16 +31,17 @@ export type initialStateType = {
     isFetching: boolean
     followingInProgress: Array<any>
     GetUsers: (currentPage: number, pageSize: number) => void
-    // GetUsersSuperSelector: (currentPage: number, pageSize: number) => void
-}
+ }
 
 class UsersContainer extends React.Component<initialStateType> {
     componentDidMount() {
-        this.props.GetUsers(this.props.currentPage, this.props.pageSize);
+        let {currentPage,pageSize}=this.props
+        this.props.GetUsers(currentPage, pageSize);
     }
 
     onPageChange = (pageNumber: number) => {
-        this.props.GetUsers(pageNumber, this.props.pageSize);
+        let {pageSize}=this.props
+        this.props.GetUsers(pageNumber, pageSize);
     }
 
     render() {

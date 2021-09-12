@@ -1,15 +1,17 @@
 import React, {ChangeEvent} from 'react';
 import styles from './FormsControls.module.css'
+import {Field} from "redux-form";
+import {required} from "../../../utilites/validators/validators";
 
-const FormControl=({input, meta, child, ...props}: any)=>{
-    //child-это то что мы можем передать
-    const hasError = meta.touched && meta.error
+//дестриктурируем пропсы
+const FormControl=({input, meta:{touched,error}, children}: any)=>{
+    const hasError = touched && error
     return (
         <div className={styles.formControl + ' ' + (hasError ? styles.error : '')}>
             <div>
-                {props.children}
+                {children}
             </div>
-            {hasError && <span>{meta.error}</span>}
+            {hasError && <span>{error}</span>}
         </div>
     )
 }
@@ -27,6 +29,44 @@ export const Input = (props: any) => {
     return <FormControl {...props}><input {...input} {...meta} {...props}/></FormControl>
     // <FormControl><передаем child ></FormControl>
 }
+
+
+
+export const CreateField=(placeholder:any,name:any,component:any,validate:any,props={},text='')=>{
+    return(
+        <div>
+        <Field placeholder={placeholder} name={name} component={component}
+               validate={validate} {...props}/> {text}
+        </div>
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

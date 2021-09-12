@@ -1,13 +1,6 @@
-import {
-    ActionsTypes,
-    AddPostActionType,
-    iprofilePage, setStatusAC,
-    setUserProfileActionType,
-    updateNewPostTextActionType
-} from "./store";
+import {ActionsTypes, AddPostActionType, iprofilePage, setStatusAC, setUserProfileActionType} from "./store";
 import {profileAPI, usersAPI} from "../api/api";
-import {AppStateType} from "./redux-store";
-import {number} from "prop-types";
+
 type contactsType = {
     facebook: string
     website: string
@@ -75,14 +68,7 @@ const profileReducer = (state: iprofilePage = initialState, action: ActionsTypes
                 newPostText: '',
             };
         }
-        // case  updateNewPostText: {
-        //     return {
-        //         ...state,
-        //         posts: [...state.posts],
-        //         newPostText: action.newText
-        //     };
-        // }
-        case  SET_STATUS: {
+          case  SET_STATUS: {
                      return {
                 ...state,
                 status: action.status
@@ -114,25 +100,20 @@ export let setStatus = (status: string): setStatusAC => {
         status
     }
 }
-export const getUserProfile = (userId: any) => (dispatch: any) => {
-    usersAPI.getProfile(userId).then(response => {
+export const getUserProfile =  (userId: any) => async (dispatch: any) => {
+    let response=await usersAPI.getProfile(userId)
         dispatch(setUserProfile(response.data));
-    });
 }
 //создаем санку
-export let getStatus = (userId: number) => (dispatch: any) => {
-    profileAPI.getStatus(userId)
-        .then(response => {
+export let getStatus = (userId: number) => async (dispatch: any) => {
+    let response=await profileAPI.getStatus(userId)
         dispatch(setStatus(response.data))
-    })
 }
-export let updateStatus = (status: string) => (dispatch: any) => {
-    profileAPI.updateStatus(status)
-        .then(response => {
+export let updateStatus = (status: string) => async(dispatch: any) => {
+    let response=await profileAPI.updateStatus(status)
             if (response.data.resultCode === 0) {
                 dispatch(setStatus(status))
             }
-        })
 }
 // export let newPostElementCreator = (text: string): updateNewPostTextActionType => {
 //     return {

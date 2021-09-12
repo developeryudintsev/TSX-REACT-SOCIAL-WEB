@@ -8,25 +8,25 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./login/login";
 import {connect} from "react-redux";
-import {getAuthUserData, logout} from "./redux/auth-reducer";
 import {compose} from "redux";
-import {initializeApp, initialStateType} from "./redux/app-reducer";
+import {initializeApp} from "./redux/app-reducer";
 import {AppStateType} from "./redux/redux-store";
 import {Preloader} from "./components/common/Preloader/Preloader";
 
 export type initialStateTypes = {
-    initializeApp   : () => void
-    initialized:AppStateType
+    initializeApp: () => void
+    initialized: AppStateType
 }
 
 class App extends React.Component <initialStateTypes> {
     componentDidMount() {
         this.props.initializeApp()
     }
+
     render() {
         //будем возвращать только когда проинициализировались
-        if(!this.props.initialized){
-            return  <Preloader/>
+        if (!this.props.initialized) {
+            return <Preloader/>
         }
         return (
             <div className='app-wrapper'>
@@ -47,8 +47,8 @@ type MapStateToPropsType = {
     initialized: boolean
 }
 
-const mapStateToProps=(state:AppStateType)=>({
-    initialized:state.app.initialized
+const mapStateToProps = (state: AppStateType) => ({
+    initialized: state.app.initialized
 })
 
 export default compose(withRouter,

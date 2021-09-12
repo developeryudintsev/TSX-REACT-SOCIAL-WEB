@@ -1,9 +1,7 @@
 import React from 'react';
-import styles from "./Users.module.css";
 import {usersType} from "../../redux/users-reducer";
-import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {usersAPI} from "../../api/api";
+import {Paginator} from "../common/Paginator/Paginator";
+import {User} from "./User";
 
 type propsType = {
     pageSize: number
@@ -13,60 +11,70 @@ type propsType = {
     follow: (id: number) => void
     unfollow: (id: number) => void
     users: Array<usersType>
-    // toggleFollowingProgress: (isFetching: boolean, userID: number) => void
     followingInProgress: Array<any>
 }
 
-export const Users = (props: propsType) => {
-    let pageCount = Math.ceil(props.totalUserscount / props.pageSize);
-    let pages = [];
-    for (let i = 1; i <= pageCount; i++) {
-        pages.push(i);
-    }
+
+export const Users = ({pageSize, totalUserscount, onPageChange, currentPage, ...props}: propsType) => {
     return (
         <div>
-            <div className={styles.pagesBlock}>
-                {pages.map(p =>
-                    <span className={props.currentPage === p ? styles.selectedPage : styles.pages}
-                          onClick={(event) => {
-                              props.onPageChange(p)
-                          }}>{p}</span>
-                )}
-            </div>
-            {props.users.map(m =>
-                <div key={m.id}>
-            <span>
-                <div>
-                   <NavLink to={'/profile/' + m.id}>
-                        <img src={m.photos.small != null
-                            ? m.photos.small
-                            : 'https://e7.pngegg.com/pngimages/613/636/png-clipart-computer-icons-user-profile-male-avatar-avatar-heroes-logo.png'}
-                             className={styles.picture}/>
-                    </NavLink>
-                </div>
-                <div>
-                    {m.followed
-                        ? <button disabled={props.followingInProgress.some(id => id === m.id)}
-                                  onClick={() => {
-                                      props.unfollow(m.id)
-                                  }} className={styles.margForBtn}>UNFollow</button>
-                        : <button disabled={props.followingInProgress.some(id => id === m.id)}
-                                  onClick={() => {
-                                      props.follow(m.id)
-                                  }} className={styles.margForBtn}>Follow</button>
-                    }
-                </div>
-            </span>
-                    <span>
-                        <div className={styles.marg}>{m.name}</div>
-                        <div className={styles.marg}>{m.status}</div>
+            <Paginator pageSize={pageSize} totalUserscount={totalUserscount} onPageChange={onPageChange}
+                       currentPage={currentPage}/>
+            {props.users.map(m => <User key={m.id} pageSize={pageSize} totalUserscount={totalUserscount}
+                                        onPageChange={onPageChange}
+                                        currentPage={currentPage} follow={props.follow} unfollow={props.unfollow}
+                                        user={m} followingInProgress={props.followingInProgress}/>
+                // <div key={m.id}>
+                // <span>
+                //     <div>
+                //        <NavLink to={'/profile/' + m.id}>
+                //             <img src={m.photos.small != null
+                //                 ? m.photos.small
+                //                 : 'https://e7.pngegg.com/pngimages/613/636/png-clipart-computer-icons-user-profile-male-avatar-avatar-heroes-logo.png'}
+                //                  className={styles.picture}/>
+                //         </NavLink>
+                //     </div>
+                //     <div>
+                //         {m.followed
+                //             ? <button disabled={props.followingInProgress.some(id => id === m.id)}
+                //                       onClick={() => {
+                //                           props.unfollow(m.id)
+                //                       }} className={styles.margForBtn}>UNFollow</button>
+                //             : <button disabled={props.followingInProgress.some(id => id === m.id)}
+                //                       onClick={() => {
+                //                           props.follow(m.id)
+                //                       }} className={styles.margForBtn}>Follow</button>
+                //         }
+                //     </div>
+                // </span>
+                //         <span>
+                //             <div className={styles.marg}>{m.name}</div>
+                //             <div className={styles.marg}>{m.status}</div>
+                //
+                //         </span>
+                //         <span>
+                //             <div className={styles.marg}>{"m.location.country"}</div><div
+                //             className={styles.marg}>{"m.location.city"}</div>
+                //         </span>
+                //     </div>
 
-                    </span>
-                    <span>
-                        <div className={styles.marg}>{"m.location.country"}</div><div
-                        className={styles.marg}>{"m.location.city"}</div>
-                    </span>
-                </div>)}
+            )}
         </div>
     )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

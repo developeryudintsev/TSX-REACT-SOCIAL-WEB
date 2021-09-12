@@ -10,13 +10,24 @@ type propsType = {
     updateStatus:any
  }
 
-const Profile = (props:propsType) => {
+const Profile = ({profile,status,updateStatus}:propsType) => {
     return (
         <div>
-            <ProfileInfo profile={props.profile}  status={props.status} updateStatus={props.updateStatus}/>
+            <ProfileInfo profile={profile}  status={status} updateStatus={updateStatus}/>
             <MyPostsContainer/>
         </div>
     )
 }
 
 export default Profile;
+
+
+
+
+
+
+
+
+
+
+
