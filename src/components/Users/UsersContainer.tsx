@@ -48,6 +48,8 @@ class UsersContainer extends React.Component<initialStateType> {
         return (
             <>
                 {this.props.isFetching ? <Preloader/> : null}
+                {this.props.isFetching ? <Preloader/> : null}
+
                 <Users
                     pageSize={this.props.pageSize}
                     totalUserscount={this.props.totalUsersCount}
