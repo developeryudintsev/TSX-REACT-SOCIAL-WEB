@@ -65,8 +65,12 @@ export type SendMessageType = {
     type: 'Send-Message',
     newMessageBody:string
 }
+export type savePhotoSuccessType = {
+    type: 'SET_PHOTO_SUCCESS',
+    photos:any
+}
 export type ActionsTypes = AddPostActionType | updateNewPostTextActionType | updateNewMessageBodyType
-    | SendMessageType |setUserProfileActionType|setStatusAC
+    | SendMessageType |setUserProfileActionType|setStatusAC|savePhotoSuccessType
 
 let store: StoreType = {
     _state: {
